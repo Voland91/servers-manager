@@ -11,6 +11,10 @@ const GlobalStyle = createGlobalStyle`
         
     }
 
+    body {
+        background-color: #F2F3F6;
+    }
+
     button,
     input,
     optgroup,

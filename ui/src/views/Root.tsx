@@ -1,13 +1,17 @@
 import GlobalStyle from '../theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme/mainTheme';
+import Header from '../components/atoms/Header/Header';
 import Text from '../components/atoms/Text/Text';
+import SearchBar from '../components/molecules/SearchBar/SearchBar';
 
 const Root: React.FC = () => (
   <>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
-      <Text>asda</Text>
+      <Header>header</Header>
+      <Text>server name</Text>
+      <SearchBar />
     </ThemeProvider>
   </>
 );
