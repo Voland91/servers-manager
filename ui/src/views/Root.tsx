@@ -1,12 +1,13 @@
-import GlobalStyle from "../theme/GlobalStyle";
-import { ThemeProvider } from "styled-components";
-import theme from "../theme/mainTheme";
+import GlobalStyle from '../theme/GlobalStyle';
+import { ThemeProvider } from 'styled-components';
+import theme from '../theme/mainTheme';
+import Text from '../components/atoms/Text/Text';
 
-const Root = () => (
+const Root: React.FC = () => (
   <>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
-      <p>asda</p>
+      <Text>asda</Text>
     </ThemeProvider>
   </>
 );
