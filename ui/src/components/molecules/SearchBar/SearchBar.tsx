@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import Input from '../../atoms/Input/Input';
+import TextInput from '../../atoms/TextInput/TextInput';
 import StyledSearchBarWrapper from './SearchBar.styles';
 import Icon from '../../atoms/Icon/Icon';
 
 const SearchBar: FC = () => (
   <StyledSearchBarWrapper>
     <Icon icon="search" />
-    <Input />
+    <TextInput />
   </StyledSearchBarWrapper>
 );
 

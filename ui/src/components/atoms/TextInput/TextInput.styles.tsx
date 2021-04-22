@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledInputWrapper = styled.input`
+const StyledTextInputWrapper = styled.input`
   font-size: ${({ theme }) => theme.fontSizes.m};
   font-family: ${({ theme }) => theme.fontFamilies.primary};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
@@ -10,4 +10,4 @@ const StyledInputWrapper = styled.input`
   outline: none;
 `;
 
-export default StyledInputWrapper;
+export default StyledTextInputWrapper;
