@@ -2,29 +2,30 @@ import React, { FC } from 'react';
 import StyledIcon from './Icon.styles';
 import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 import { ReactComponent as XIcon } from '../../../assets/icons/x.svg';
-import { ReactComponent as DotsIcon } from '../../../assets/icons/dots.svg';
 import { ReactComponent as CircleIcon } from '../../../assets/icons/circle.svg';
+import { ReactComponent as DotIcon } from '../../../assets/icons/dot.svg';
 
-type IconIcon = 'search' | 'x' | 'dots' | 'circle';
+type IconIcon = 'search' | 'x' | 'circle' | 'dot';
 
 export interface IconProps {
   children?: string;
   icon?: IconIcon;
   circle?: boolean;
+  dot?: boolean;
 }
 
-const Icon: FC<IconProps> = ({ icon, circle }) => (
-  <StyledIcon circle={circle}>
+const Icon: FC<IconProps> = ({ icon, circle, dot }) => (
+  <StyledIcon circle={circle} dot={dot}>
     {(() => {
       switch (icon) {
         case 'search':
           return <SearchIcon />;
         case 'x':
           return <XIcon />;
-        case 'dots':
-          return <DotsIcon />;
         case 'circle':
           return <CircleIcon />;
+        case 'dot':
+          return <DotIcon />;
       }
     })()}
   </StyledIcon>
