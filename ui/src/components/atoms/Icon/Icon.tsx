@@ -10,10 +10,11 @@ type IconIcon = 'search' | 'x' | 'dots' | 'circle';
 export interface IconProps {
   children?: string;
   icon?: IconIcon;
+  circle?: boolean;
 }
 
-const Icon: FC<IconProps> = ({ icon }) => (
-  <StyledIcon>
+const Icon: FC<IconProps> = ({ icon, circle }) => (
+  <StyledIcon circle={circle}>
     {(() => {
       switch (icon) {
         case 'search':
