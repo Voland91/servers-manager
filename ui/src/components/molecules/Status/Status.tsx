@@ -3,40 +3,30 @@ import Icon from '../../atoms/Icon/Icon';
 import Text from '../../atoms/Text/Text';
 import StyledStatusWrapper from './Status.styles';
 
-type Status = 'online' | 'offline' | 'reboot';
-
-interface HeaderProps {
-  type?: Status;
+interface StatusProps {
+  online?: boolean;
+  offline?: boolean;
+  reboot?: boolean;
 }
 
-const Status: FC<HeaderProps> = ({ type }) => (
-  <>
-    {(() => {
-      switch (type) {
-        case 'online':
-          return (
-            <StyledStatusWrapper>
-              <Icon icon="dot" dot />
-              <Text online>online</Text>
-            </StyledStatusWrapper>
-          );
-        case 'offline':
-          return (
-            <StyledStatusWrapper>
-              <Icon icon="dot" dot />
-              <Text online>online</Text>
-            </StyledStatusWrapper>
-          );
-        case 'reboot':
-          return (
-            <StyledStatusWrapper>
-              <Icon icon="dot" dot />
-              <Text online>online</Text>
-            </StyledStatusWrapper>
-          );
-      }
-    })()}
-  </>
+const Status: FC<StatusProps> = ({ online, offline, reboot }) => (
+  <StyledStatusWrapper>
+    {online && (
+      <>
+        <Icon icon="dot" dot />
+        <Text online>online</Text>
+      </>
+    )}
+
+    {offline && (
+      <>
+        <Icon icon="cross" cross />
+        <Text offline>offline</Text>
+      </>
+    )}
+
+    {reboot && <Text reboot>rebooting...</Text>}
+  </StyledStatusWrapper>
 );
 
 export default Status;

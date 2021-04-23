@@ -13,8 +13,9 @@ const StyledListItemWrapper = styled.div`
 
 const StyledNameWrapper = styled.div`
   width: 100%;
-  max-width: 378px;
+  max-width: 420px;
   padding-left: 42px;
+  padding-right: 20px;
   display: flex;
   justify-content: space-between;
 `;

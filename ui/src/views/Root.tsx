@@ -13,9 +13,9 @@ const Root: React.FC = () => (
       <NavBar />
       <Header />
       <ListHeader />
-      <ListItem />
-      <ListItem />
-      <ListItem />
+      <ListItem online />
+      <ListItem offline />
+      <ListItem reboot />
     </ThemeProvider>
   </>
 );

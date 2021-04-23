@@ -11,10 +11,13 @@ const StyledListHeaderWrapper = styled.div`
   padding-right: 70px;
 `;
 
-const StyledNameWrapper = styled.div`
+const StyledHeader = styled.div`
   width: 100%;
-  max-width: 329px;
+  max-width: 400px;
   padding-left: 42px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
 `;
 
-export { StyledListHeaderWrapper, StyledNameWrapper };
+export { StyledListHeaderWrapper, StyledHeader };

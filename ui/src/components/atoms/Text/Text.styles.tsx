@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 interface StyledTextProps {
   webtitle?: boolean;
   online?: boolean;
+  offline?: boolean;
+  reboot?: boolean;
 }
 
 const StyledText = styled.p<StyledTextProps>`
@@ -25,6 +27,22 @@ const StyledText = styled.p<StyledTextProps>`
     css`
       font-size: ${({ theme }) => theme.fontSizes.xs};
       color: ${({ theme }) => theme.colors.green};
+      text-transform: uppercase;
+    `}
+
+    ${({ offline }) =>
+    offline &&
+    css`
+      font-size: ${({ theme }) => theme.fontSizes.xs};
+      color: ${({ theme }) => theme.colors.dark};
+      text-transform: uppercase;
+    `}
+
+    ${({ reboot }) =>
+    reboot &&
+    css`
+      font-size: ${({ theme }) => theme.fontSizes.xs};
+      color: ${({ theme }) => theme.colors.grayBlue};
       text-transform: uppercase;
     `}
 `;

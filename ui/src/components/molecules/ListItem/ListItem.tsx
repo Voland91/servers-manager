@@ -1,14 +1,20 @@
 import { FC } from 'react';
 import Select from '../../atoms/Select/Select';
 import Text from '../../atoms/Text/Text';
-import Status from '../../molecules/Status/Status';
+import Status from '../Status/Status';
 import { StyledListItemWrapper, StyledNameWrapper } from './ListItem.styles';
 
-const ListItem: FC = () => (
+interface StatusProps {
+  online?: boolean;
+  offline?: boolean;
+  reboot?: boolean;
+}
+
+const ListItem: FC<StatusProps> = ({ online, offline, reboot }) => (
   <StyledListItemWrapper>
     <StyledNameWrapper>
       <Text>US East (Virginia)</Text>
-      <Status type="online" />
+      <Status online={online} offline={offline} reboot={reboot} />
     </StyledNameWrapper>
     <Select />
   </StyledListItemWrapper>

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 interface StyledIconProps {
   circle?: boolean;
   dot?: boolean;
+  cross?: boolean;
 }
 
 const StyledIcon = styled.svg<StyledIconProps>`
@@ -30,6 +31,16 @@ const StyledIcon = styled.svg<StyledIconProps>`
       fill: ${({ theme }) => theme.colors.greenLight};
       margin-left: 0;
       margin-right: 7px;
+    `}
+
+  ${({ cross }) =>
+    cross &&
+    css`
+      height: 10px;
+      width: 11px;
+      fill: ${({ theme }) => theme.colors.red};
+      margin-left: 0;
+      margin-right: 4px;
     `}
 `;
 
