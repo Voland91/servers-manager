@@ -9,7 +9,6 @@ const StyledSearchBarWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.lightBg};
   border: solid 2px ${({ theme }) => theme.colors.grayLight};
   border-radius: 50px;
-  margin-right: 20px;
 `;
 
 export default StyledSearchBarWrapper;

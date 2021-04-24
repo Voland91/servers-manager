@@ -3,10 +3,15 @@ import TextInput from '../../atoms/TextInput/TextInput';
 import StyledSearchBarWrapper from './SearchBar.styles';
 import Icon from '../../atoms/Icon/Icon';
 
-const SearchBar: FC = () => (
+interface SearchBarProps {
+  value?: string | number;
+  handleSearch?: React.ChangeEventHandler<HTMLInputElement>;
+}
+
+const SearchBar: FC<SearchBarProps> = ({ handleSearch, value }) => (
   <StyledSearchBarWrapper>
     <Icon icon="search" />
-    <TextInput />
+    <TextInput handleSearch={handleSearch} value={value} />
   </StyledSearchBarWrapper>
 );
 

@@ -1,6 +1,13 @@
 import { FC } from 'react';
 import StyledTextInputWrapper from './TextInput.styles';
 
-const TextInput: FC = () => <StyledTextInputWrapper placeholder="Search" type="text" />;
+interface TextInputProps {
+  value?: string | number;
+  handleSearch?: React.ChangeEventHandler<HTMLInputElement>;
+}
+
+const TextInput: FC<TextInputProps> = ({ value, handleSearch }) => (
+  <StyledTextInputWrapper placeholder="Search" type="text" onChange={handleSearch} value={value} />
+);
 
 export default TextInput;

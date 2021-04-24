@@ -3,7 +3,8 @@ import ListHeader from '../../molecules/ListHeader/ListHeader';
 import ListItem from '../../molecules/ListItem/ListItem';
 import Text from '../../atoms/Text/Text';
 import Header from '../../molecules/Header/Header';
-import StyledNoServersMessage from './ServersList.styles';
+import { StyledNoServersMessage, StyledHeaderWrapper } from './ServersList.styles';
+import SearchBar from '../../molecules/SearchBar/SearchBar';
 
 interface Server {
   key: number;
@@ -14,6 +15,7 @@ interface Server {
 
 const ServersList: FC = () => {
   const [servers, setServers] = useState<Server[] | null>(null);
+  const [search, setSearch] = useState<Server[] | undefined | null>(null);
 
   useEffect(() => {
     fetch('http://localhost:4454/servers')
@@ -22,15 +24,26 @@ const ServersList: FC = () => {
       })
       .then((data) => {
         setServers(data);
+        setSearch(data);
       });
   }, []);
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const filteredServers = servers?.filter(
+      (server) => server.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1,
+    );
+    setSearch(filteredServers);
+  };
+
   return (
     <>
-      <Header length={servers?.length} />
+      <StyledHeaderWrapper>
+        <Header length={search?.length} />
+        <SearchBar handleSearch={handleSearch} />
+      </StyledHeaderWrapper>
       <ListHeader />
-      {servers ? (
-        servers.map((server) => <ListItem status={server.status} name={server.name} id={server.id} key={server.id} />)
+      {search ? (
+        search.map((server) => <ListItem status={server.status} name={server.name} id={server.id} key={server.id} />)
       ) : (
         <StyledNoServersMessage>
           <Text>Sorry, there is no servers to list 🙁</Text>
