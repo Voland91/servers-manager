@@ -7,6 +7,7 @@ interface MenuWrapperProps {
 const StyledMenuWrapper = styled.div<MenuWrapperProps>`
   position: absolute;
   right: 0;
+  top: 0;
   width: 137px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.4);
