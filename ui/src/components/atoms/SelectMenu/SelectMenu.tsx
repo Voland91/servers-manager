@@ -4,22 +4,23 @@ import { StyledMenuWrapper, StyledUl, StyledLi } from './SelectMenu.styles';
 interface SelectMenuProps {
   status: string;
   isOpen: boolean;
+  handleClickOption: React.MouseEventHandler<HTMLElement>;
 }
 
-const SelectMenu: FC<SelectMenuProps> = ({ status, isOpen }) => (
+const SelectMenu: FC<SelectMenuProps> = ({ status, isOpen, handleClickOption }) => (
   <StyledMenuWrapper open={isOpen}>
     <StyledUl>
       {status === 'ONLINE' && (
         <>
-          <StyledLi>Turn off</StyledLi>
-          <StyledLi>Reboot</StyledLi>
+          <StyledLi onClick={handleClickOption}>Turn off</StyledLi>
+          <StyledLi onClick={handleClickOption}>Reboot</StyledLi>
         </>
       )}
 
       {status === 'OFFLINE' && (
         <>
-          <StyledLi>Turn on</StyledLi>
-          <StyledLi>Reboot</StyledLi>
+          <StyledLi onClick={handleClickOption}>Turn on</StyledLi>
+          <StyledLi onClick={handleClickOption}>Reboot</StyledLi>
         </>
       )}
     </StyledUl>

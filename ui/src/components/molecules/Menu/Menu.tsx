@@ -30,10 +30,15 @@ const Menu: FC<MenuProps> = ({ status }) => {
     };
   }, []);
 
+  const handleClickOption = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setOpen(false);
+  };
+
   return (
     <div onClick={(e) => e.stopPropagation()} ref={ref}>
       <Button handleOpenMenu={handleOpenMenu} />
-      <SelectMenu status={status} isOpen={open} />
+      <SelectMenu status={status} isOpen={open} handleClickOption={handleClickOption} />
     </div>
   );
 };
