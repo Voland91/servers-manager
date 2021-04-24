@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Select from '../Select/Select';
+import Menu from '../Menu/Menu';
 import Text from '../../atoms/Text/Text';
 import Status from '../Status/Status';
 import { StyledListItemWrapper, StyledNameWrapper } from './ListItem.styles';
@@ -17,7 +17,7 @@ const ListItem: FC<ListItemProps> = ({ name, status }) => (
       <Text>{name}</Text>
       <Status status={status} />
     </StyledNameWrapper>
-    <Select status={status} />
+    <Menu status={status} />
   </StyledListItemWrapper>
 );
 
