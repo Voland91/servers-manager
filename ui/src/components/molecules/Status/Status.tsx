@@ -4,28 +4,26 @@ import Text from '../../atoms/Text/Text';
 import StyledStatusWrapper from './Status.styles';
 
 interface StatusProps {
-  online?: boolean;
-  offline?: boolean;
-  reboot?: boolean;
+  status: string;
 }
 
-const Status: FC<StatusProps> = ({ online, offline, reboot }) => (
+const Status: FC<StatusProps> = ({ status }) => (
   <StyledStatusWrapper>
-    {online && (
+    {status === 'ONLINE' && (
       <>
         <Icon icon="dot" dot />
         <Text online>online</Text>
       </>
     )}
 
-    {offline && (
+    {status === 'OFFLINE' && (
       <>
         <Icon icon="cross" cross />
         <Text offline>offline</Text>
       </>
     )}
 
-    {reboot && <Text reboot>rebooting...</Text>}
+    {status === 'REBOOTING' && <Text reboot>rebooting...</Text>}
   </StyledStatusWrapper>
 );
 
