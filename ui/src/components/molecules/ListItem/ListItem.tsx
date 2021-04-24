@@ -4,12 +4,6 @@ import Text from '../../atoms/Text/Text';
 import Status from '../Status/Status';
 import { StyledListItemWrapper, StyledNameWrapper } from './ListItem.styles';
 
-// interface StatusProps {
-//   online?: boolean;
-//   offline?: boolean;
-//   reboot?: boolean;
-// }
-
 interface ListItemProps {
   status: string;
   id: number;
