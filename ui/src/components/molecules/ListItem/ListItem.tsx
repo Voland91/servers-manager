@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Server } from '../../organisms/ServersList/ServersList';
 import Menu from '../Menu/Menu';
 import Text from '../../atoms/Text/Text';
 import Status from '../Status/Status';
@@ -9,17 +8,17 @@ interface ListItemProps {
   status: string;
   id: number;
   name: string;
-  rebootingServer: (server: Server) => void;
+  refreshServerStatus: (serverId: number) => void;
 }
 
-const ListItem: FC<ListItemProps> = ({ name, status, id, rebootingServer }) => {
+const ListItem: FC<ListItemProps> = ({ name, status, id, refreshServerStatus }) => {
   return (
     <StyledListItemWrapper>
       <StyledNameWrapper>
         <Text>{name}</Text>
         <Status status={status} />
       </StyledNameWrapper>
-      <Menu status={status} id={id} rebootingServer={rebootingServer} />
+      <Menu status={status} id={id} refreshServerStatus={refreshServerStatus} />
     </StyledListItemWrapper>
   );
 };

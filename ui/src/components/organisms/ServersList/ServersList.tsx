@@ -14,8 +14,9 @@ export interface Server {
 }
 
 const ServersList: FC = () => {
-  const [servers, setServers] = useState<Server[] | null>(null);
-  const [search, setSearch] = useState<Server[] | undefined | null>(null);
+  const [servers, setServers] = useState<Server[]>([]);
+  const [search, setSearch] = useState<string>('');
+  const [temporaryList, setTemporaryList] = useState<Server[]>([]);
 
   useEffect(() => {
     fetch('http://localhost:4454/servers')
@@ -24,44 +25,96 @@ const ServersList: FC = () => {
       })
       .then((data) => {
         setServers(data);
-        setSearch(data);
       });
   }, []);
 
-  const rebootingServer = (reboot: Server) => {
-    servers?.find((server, i) => {
-      if (server.id === reboot.id) {
-        const freshList = [...servers];
-        freshList[i] = reboot;
-        setServers(freshList);
-        setSearch(freshList);
-        console.log(reboot);
+  const REFRESH_INTERVAL = 1000;
+
+  const refreshServerStatus = (serverId: number) => {
+    servers.filter((server, i) => {
+      if (server.id === serverId) {
+        fetch(`http://localhost:4454/servers/${serverId}`)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data.status !== 'REBOOTING') {
+              const updatedList = [...servers];
+              updatedList[i] = data;
+              setServers(updatedList);
+            } else {
+              const interval = setInterval(() => {
+                fetch(`http://localhost:4454/servers/${serverId}`)
+                  .then((res) => {
+                    return res.json();
+                  })
+                  .then((data) => {
+                    if (data.status === 'ONLINE') {
+                      const updatedList = [...servers];
+                      updatedList[i] = data;
+                      setServers(updatedList);
+                      clearInterval(interval);
+                    }
+                    const updatedList = [...servers];
+                    updatedList[i] = data;
+                    setServers(updatedList);
+                  });
+              }, REFRESH_INTERVAL);
+            }
+          });
+
+        // if (server.status === 'REBOOTING') {
+        //   const interval = setInterval(() => {
+        //     fetch(`http://localhost:4454/servers/${serverId}`)
+        //       .then((res) => {
+        //         return res.json();
+        //       })
+        //       .then((data) => {
+        //         if (data.status === 'ONLINE') {
+        //           updatedList[i] = data;
+        //           setServers(updatedList);
+        //           clearInterval(interval);
+        //         }
+        //         updatedList[i] = data;
+        //         setServers(updatedList);
+        //       });
+        //   }, REFRESH_INTERVAL);
+        // } else {
+        //   console.log(server.status);
+        //   fetch(`http://localhost:4454/servers/${serverId}`)
+        //     .then((res) => {
+        //       return res.json();
+        //     })
+        //     .then((data) => {
+        //       updatedList[i] = data;
+        //       setServers(updatedList);
+        //     });
+        // }
       }
     });
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredServers = servers?.filter(
-      (server) => server.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1,
-    );
-    setSearch(filteredServers);
+    setSearch(e.target.value.toLowerCase());
   };
+
+  const filteringServers = servers?.filter((server) => server.name.toLowerCase().indexOf(search) !== -1);
 
   return (
     <>
       <StyledHeaderWrapper>
-        <Header length={search?.length} />
+        <Header length={servers?.length} />
         <SearchBar handleSearch={handleSearch} />
       </StyledHeaderWrapper>
       <ListHeader />
-      {search ? (
-        search.map((server) => (
+      {servers ? (
+        filteringServers.map((server) => (
           <ListItem
             status={server.status}
             name={server.name}
             id={server.id}
             key={server.id}
-            rebootingServer={rebootingServer}
+            refreshServerStatus={refreshServerStatus}
           />
         ))
       ) : (
