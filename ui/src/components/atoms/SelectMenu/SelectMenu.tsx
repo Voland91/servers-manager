@@ -5,22 +5,28 @@ interface SelectMenuProps {
   status: string;
   isOpen: boolean;
   handleClickOption: React.MouseEventHandler<HTMLElement>;
+  id: number;
 }
 
-const SelectMenu: FC<SelectMenuProps> = ({ status, isOpen, handleClickOption }) => (
+const SelectMenu: FC<SelectMenuProps> = ({ status, isOpen, handleClickOption, id }) => (
   <StyledMenuWrapper open={isOpen}>
     <StyledUl>
       {status === 'ONLINE' && (
         <>
-          <StyledLi onClick={handleClickOption}>Turn off</StyledLi>
-          <StyledLi onClick={handleClickOption}>Reboot</StyledLi>
+          <StyledLi onClick={handleClickOption} id={id.toString()} title={'off'}>
+            Turn off
+          </StyledLi>
+          <StyledLi onClick={handleClickOption} id={id.toString()} title={'reboot'}>
+            Reboot
+          </StyledLi>
         </>
       )}
 
       {status === 'OFFLINE' && (
         <>
-          <StyledLi onClick={handleClickOption}>Turn on</StyledLi>
-          <StyledLi onClick={handleClickOption}>Reboot</StyledLi>
+          <StyledLi onClick={handleClickOption} id={id.toString()} title={'on'}>
+            Turn on
+          </StyledLi>
         </>
       )}
     </StyledUl>

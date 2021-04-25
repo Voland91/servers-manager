@@ -6,7 +6,7 @@ import Header from '../../molecules/Header/Header';
 import { StyledNoServersMessage, StyledHeaderWrapper } from './ServersList.styles';
 import SearchBar from '../../molecules/SearchBar/SearchBar';
 
-interface Server {
+export interface Server {
   key: number;
   id: number;
   name: string;
@@ -28,6 +28,18 @@ const ServersList: FC = () => {
       });
   }, []);
 
+  const rebootingServer = (reboot: Server) => {
+    servers?.find((server, i) => {
+      if (server.id === reboot.id) {
+        const freshList = [...servers];
+        freshList[i] = reboot;
+        setServers(freshList);
+        setSearch(freshList);
+        console.log(reboot);
+      }
+    });
+  };
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const filteredServers = servers?.filter(
       (server) => server.name.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1,
@@ -43,7 +55,15 @@ const ServersList: FC = () => {
       </StyledHeaderWrapper>
       <ListHeader />
       {search ? (
-        search.map((server) => <ListItem status={server.status} name={server.name} id={server.id} key={server.id} />)
+        search.map((server) => (
+          <ListItem
+            status={server.status}
+            name={server.name}
+            id={server.id}
+            key={server.id}
+            rebootingServer={rebootingServer}
+          />
+        ))
       ) : (
         <StyledNoServersMessage>
           <Text>Sorry, there is no servers to list 🙁</Text>
