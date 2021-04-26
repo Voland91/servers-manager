@@ -1,14 +1,15 @@
 import React, { FC, useState, useRef, useEffect } from 'react';
+import { changingStatus } from '../../../data/fetching';
 import Button from '../../atoms/Button/Button';
 import SelectMenu from '../../atoms/SelectMenu/SelectMenu';
 
 interface MenuProps {
   status: string;
   id: number;
-  refreshServerStatus: (serverData: number) => void;
+  refreshServer: (serverData: number) => void;
 }
 
-const Menu: FC<MenuProps> = ({ status, id, refreshServerStatus }) => {
+const Menu: FC<MenuProps> = ({ status, id, refreshServer }) => {
   const [open, setOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -37,10 +38,7 @@ const Menu: FC<MenuProps> = ({ status, id, refreshServerStatus }) => {
     e.preventDefault();
     const id = e.currentTarget.id;
     const status = e.currentTarget.title;
-
-    fetch(`http://localhost:4454/servers/${id}/${status}`, { method: 'put' }).then(() => {
-      refreshServerStatus(Number(id));
-    });
+    changingStatus(status, id, refreshServer);
 
     setOpen(false);
   };

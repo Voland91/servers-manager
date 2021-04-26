@@ -1,4 +1,6 @@
 import { FC, useEffect, useState } from 'react';
+import { Server } from '../../../environment/constans';
+import { initialFetching } from '../../../data/fetching';
 import ListHeader from '../../molecules/ListHeader/ListHeader';
 import ListItem from '../../molecules/ListItem/ListItem';
 import Text from '../../atoms/Text/Text';
@@ -6,25 +8,12 @@ import Header from '../../molecules/Header/Header';
 import { StyledNoServersMessage, StyledHeaderWrapper } from './ServersList.styles';
 import SearchBar from '../../molecules/SearchBar/SearchBar';
 
-export interface Server {
-  key: number;
-  id: number;
-  name: string;
-  status: string;
-}
-
 const ServersList: FC = () => {
   const [servers, setServers] = useState<Server[]>([]);
   const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
-    fetch('http://localhost:4454/servers')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setServers(data);
-      });
+    initialFetching(setServers);
   }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
