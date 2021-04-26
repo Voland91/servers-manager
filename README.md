@@ -1,9 +1,19 @@
 # The main assumptions 
 1. React + TypeScript
 2. Creating app ready to develop in the future
-3. Using styled-components for styling (+ take care about RWD)
-4. Atomic desing for components
-5. List component just for initial render - whole logic for changing statuses should be on list item level
+    a. Using styled-components for styling (+ take care about RWD)
+    b. Atomic desing for components
+3. List component just for initial render - whole logic for changing statuses should be on list item level
+4. Provide 1:1 UI from the invision project
+
+### Stack:
+- React,
+- TypeSrcipt, 
+- Create React App + TypeSrcipt,
+- ESLint,
+- Prettier,
+- Husky,
+- styled-components
 
 ### Installation
 
