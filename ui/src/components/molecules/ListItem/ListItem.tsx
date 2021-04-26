@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Server } from '../../../environment/constans';
 import { refreshServerStatus } from '../../../data/fetching';
 import Menu from '../Menu/Menu';
@@ -12,6 +12,10 @@ interface ListItemProps {
 
 const ListItem: FC<ListItemProps> = ({ item }) => {
   const [server, setServer] = useState<Server>(item);
+
+  useEffect(() => {
+    server.status === 'REBOOTING' && refreshServer();
+  }, []);
 
   const refreshServer = () => {
     refreshServerStatus(server.id, setServer);
