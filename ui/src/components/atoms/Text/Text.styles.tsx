@@ -1,0 +1,50 @@
+import styled, { css } from 'styled-components';
+
+interface StyledTextProps {
+  webtitle?: boolean;
+  online?: boolean;
+  offline?: boolean;
+  reboot?: boolean;
+}
+
+const StyledText = styled.p<StyledTextProps>`
+  color: ${({ theme }) => theme.colors.dark};
+  font-family: ${({ theme }) => theme.fontFamilies.primary};
+  font-size: ${({ theme }) => theme.fontSizes.s};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+
+  ${({ webtitle }) =>
+    webtitle &&
+    css`
+      font-family: ${({ theme }) => theme.fontFamilies.secondary};
+      font-size: ${({ theme }) => theme.fontSizes.m};
+      font-weight: ${({ theme }) => theme.fontWeights.bold};
+      color: ${({ theme }) => theme.colors.white};
+    `}
+
+  ${({ online }) =>
+    online &&
+    css`
+      font-size: ${({ theme }) => theme.fontSizes.xs};
+      color: ${({ theme }) => theme.colors.green};
+      text-transform: uppercase;
+    `}
+
+    ${({ offline }) =>
+    offline &&
+    css`
+      font-size: ${({ theme }) => theme.fontSizes.xs};
+      color: ${({ theme }) => theme.colors.dark};
+      text-transform: uppercase;
+    `}
+
+    ${({ reboot }) =>
+    reboot &&
+    css`
+      font-size: ${({ theme }) => theme.fontSizes.xs};
+      color: ${({ theme }) => theme.colors.grayBlue};
+      text-transform: uppercase;
+    `}
+`;
+
+export default StyledText;
