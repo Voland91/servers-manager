@@ -1,8 +1,5 @@
 /node_modules
 .idea
-<<<<<<< HEAD
 *.iml
 .vscode
-=======
 *.iml
->>>>>>> 41aa49e57e123719adf1fd3840714f76daacab8d
