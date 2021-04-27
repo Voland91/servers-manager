@@ -14,11 +14,11 @@ const ListItem: FC<ListItemProps> = ({ item }) => {
   const [server, setServer] = useState<Server>(item);
 
   useEffect(() => {
-    server.status === 'REBOOTING' && refreshServer();
+    server.status === 'REBOOTING' && refreshServer(server);
   }, []);
 
-  const refreshServer = () => {
-    refreshServerStatus(server.id, setServer);
+  const refreshServer = (serverData: Server) => {
+    refreshServerStatus(serverData, setServer);
   };
 
   return (

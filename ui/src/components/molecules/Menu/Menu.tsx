@@ -1,12 +1,13 @@
 import React, { FC, useState, useRef, useEffect } from 'react';
 import { changingStatus } from '../../../data/fetching';
+import { Server } from '../../../environment/constans';
 import Button from '../../atoms/Button/Button';
 import SelectMenu from '../../atoms/SelectMenu/SelectMenu';
 
 interface MenuProps {
   status: string;
   id: number;
-  refreshServer: (serverData: number) => void;
+  refreshServer: (serverData: Server) => void;
 }
 
 const Menu: FC<MenuProps> = ({ status, id, refreshServer }) => {

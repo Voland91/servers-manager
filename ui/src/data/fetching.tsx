@@ -17,29 +17,30 @@ const initialFetching = (state: (value: React.SetStateAction<Server[]>) => void)
 // if state is rebooting - call API every REFRESH_INTERVAL until it's online
 const REFRESH_INTERVAL = 1000;
 
-const refreshServerStatus = (id: number, state: React.Dispatch<React.SetStateAction<Server>>) => {
-  fetchBase(`${url}/${id}`).then((data: Server) => {
-    if (data.status !== 'REBOOTING') {
-      state(data);
-    } else {
-      const interval = setInterval(() => {
-        fetchBase(`${url}/${id}`).then((data) => {
-          if (data.status === 'ONLINE') {
-            state(data);
-            clearInterval(interval);
-          }
+const refreshServerStatus = (server: Server, state: React.Dispatch<React.SetStateAction<Server>>) => {
+  state(server);
+  if (server.status === 'REBOOTING') {
+    const interval = setInterval(() => {
+      fetchBase(`${url}/${server.id}`).then((data) => {
+        if (data.status === 'ONLINE') {
           state(data);
-        });
-      }, REFRESH_INTERVAL);
-    }
-  });
+          clearInterval(interval);
+        }
+        state(data);
+      });
+    }, REFRESH_INTERVAL);
+  }
 };
 
 // changing server status
-const changingStatus = (status: string, id: number | string, refresh: (serverData: number) => void) => {
-  fetch(`${url}/${id}/${status}`, { method: 'put' }).then(() => {
-    refresh(Number(id));
-  });
+const changingStatus = (status: string, id: number | string, refresh: (server: Server) => void) => {
+  fetch(`${url}/${id}/${status}`, { method: 'put' })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      refresh(data);
+    });
 };
 
 export { initialFetching, refreshServerStatus, changingStatus };
