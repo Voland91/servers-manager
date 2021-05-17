@@ -1,3 +1,5 @@
+This project was a recrutment task in one of the software houses. I've made it in Reac + TS based on provided wireframes in guidelines.
+
 # The main assumptions 
 1. React + TypeScript
 2. Creating app ready to develop in the future
